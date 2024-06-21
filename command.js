@@ -152,7 +152,7 @@ const parseCommand = async (command) => {
             return {
                 api: 'push',
                 type: 'text',
-                text: message
+                text: command
             };
         }
     }
