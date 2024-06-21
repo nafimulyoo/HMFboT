@@ -39,7 +39,7 @@ async function handleEvent(event) {
 
 
     return client.pushMessage({
-      to: event.source.userId,
+      to: "U8eb5c431fe7fcdb16f048fbb572ab7ff",
       message: {
         type: 'text',
         text: `Bot invited to\nGroup Name: ${groupSummary.groupName}\nGroup ID: ${groupId}`,
@@ -52,15 +52,15 @@ async function handleEvent(event) {
     return Promise.resolve(null);
   }
 
-  if (event.message.text == '/getuserid') {
-    return client.replyMessage({
-      replyToken: event.replyToken,
-      messages: [{
-        type: 'text',
-        text: `Your user id is ${event.source.userId}`
-      }]
-    });
-  }
+  // if (event.message.text == '/getuserid') {
+  //   return client.replyMessage({
+  //     replyToken: event.replyToken,
+  //     messages: [{
+  //       type: 'text',
+  //       text: `Your user id is ${event.source.userId}`
+  //     }]
+  //   });
+  // }
   
   const { api, ...data } = await parseCommand(event.message.text);
 
