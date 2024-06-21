@@ -39,17 +39,25 @@ async  function handleEvent(event) {
   }
 
   
-  const response = await parseCommand(event.message.text);
+  const { api, ...data } = await parseCommand(event.message.text);
 
-  if (!response) {
+  if (!api) {
     return Promise.resolve(null);
   }
 
-  // use reply API
-  return client.replyMessage({
-    replyToken: event.replyToken,
-    messages: [response],
-  });
+  if (api === 'reply') {
+    return client.replyMessage({
+      replyToken: event.replyToken,
+      messages: [data],
+    });
+  }
+
+  if (api === 'push') {
+    return client.pushMessage({
+      to: event.source.userId,
+      messages: [data],
+    });
+  }
 }
 
 // listen on port

@@ -37,8 +37,8 @@ const commands = [
     {
         command: '/rsvp',
         description: 'Create RSVP for HMFT-ITB event, and broadcast to all group',
-        usage: '/rsvp [Event Name - Event Description - Event Date]',
-        example: '/rsvp Pengambilan Berkas SS - Sekre HMFT-ITB - Jumat, 14 Juni 2024 Pukul 13.00 WIB ',
+        usage: '/rsvp [Event Name - Event Location - Event Date, Event Time]',
+        example: '/rsvp Pengambilan Berkas SS - Sekre HMFT-ITB - Jumat, 14 Juni 2024, Pukul 13.00 WIB ',
     },
     {
         command: '/broadcast',
@@ -58,6 +58,7 @@ const parseCommand = async (command) => {
         // if command not found
         if (!commands.some(c => c.command === lowerCommand.split(' ')[0])) {
             return {
+                api: 'replyMessage',
                 type: 'text',
                 text: 'Command not found, use /help for list of commands'
             };
@@ -65,6 +66,7 @@ const parseCommand = async (command) => {
 
         if (lowerCommand === '/help') {
             return {
+                api: 'replyMessage',
                 type: 'text',
                 text: `${boldSerif('[ LIST OF HMFBOT COMMAND ]')}\n` + commands.map(c => `${boldSans(c.command)}: ${c.description}\nUsage: ${c.usage}${c.note ? `\nExample: ${c.example}` : ''}${c.example ? `\nNote: ${c.note}` : ''}`).join('\n\n')
             };
@@ -72,6 +74,7 @@ const parseCommand = async (command) => {
 
         if (lowerCommand === '/about') {
             return {
+                api: 'replyMessage',
                 type: 'text',
                 text: 'This bot is created by the Talent Management Division of BP HMFT-ITB 2024/2025 #RuangBerproses and Pria Misterius 👅👅, to help automate the process of checking participant attendance. Use /help for list of commands'
             };
@@ -81,6 +84,7 @@ const parseCommand = async (command) => {
           
             if (lowerCommand.split(' ').length !== 2) {
                 return {
+                    api: 'reply',
                     type: 'text',
                     text: 'Invalid command, please use /particheck [division code]'
                 };
@@ -90,6 +94,7 @@ const parseCommand = async (command) => {
 
             if (!departments.some(department => department.code.toLowerCase() === code)) {
                 return {
+                    api: 'reply',
                     type: 'text',
                     text: 'Invalid division code, please use /particheck [division code]'
                 };
@@ -98,6 +103,7 @@ const parseCommand = async (command) => {
             // TODO: Implement @all broadcast for Particheck
             if (code === '@all') {
                 return {
+                    api: 'push',
                     type: 'text',
                     text: `This feature is not implemented yet`
                 };
@@ -106,6 +112,7 @@ const parseCommand = async (command) => {
             // TODO: Implement R1 Particheck
             if (code === 'r1') {
                 return {
+                    api: 'reply',
                     type: 'text',
                     text: `R1 is not implemented`
                 };
@@ -124,6 +131,7 @@ const parseCommand = async (command) => {
                 const worstFiveStr = worstFive.map(formatEntry).join('\n');
 
                 return {
+                    api: 'reply',
                     type: 'text',
                     text: `${boldSerif('[ PARTICHECK RING 2 ]')}\nTop 5 Participants:\n${bestFiveStr}\n\nBottom 5 Participants:\n${worstFiveStr}`
                 };
@@ -132,6 +140,7 @@ const parseCommand = async (command) => {
             // TODO: Implement Division Particheck
             if (departments.some(department => department.code.toLowerCase() === code)) {
                 return {
+                    api: 'reply',
                     type: 'text',
                     text: `This feature is not implemented yet`
                 };
@@ -142,6 +151,7 @@ const parseCommand = async (command) => {
             // TODO: Implement @all broadcast for HMFTThisWeek
             if (lowerCommand.split(' ')[1] === '@all') {
                 return {
+                    api: 'push',
                     type: 'text',
                     text: `This feature is not implemented yet`
                 };
@@ -149,6 +159,7 @@ const parseCommand = async (command) => {
             // TODO: Implement HMFTThisWeek default
             else {
                 return {
+                    api: 'reply',
                     type: 'text',
                     text: `This feature is not implemented yet`
                 };
@@ -160,6 +171,7 @@ const parseCommand = async (command) => {
             // TODO: Implement @all broadcast for Attendance
             if (lowerCommand.split(' ')[1] === '@all') {
                 return {
+                    api: 'push',
                     type: 'text',
                     text: `This feature is not implemented yet`
                 };
@@ -168,6 +180,7 @@ const parseCommand = async (command) => {
             // TODO: Implement Attendance default
             else {
                 return {
+                    api: 'reply',
                     type: 'text',
                     text: `This feature is not implemented yet`
                 };
@@ -177,14 +190,16 @@ const parseCommand = async (command) => {
         if (lowerCommand.startsWith('/rsvp')) {
             const event = command.split(' ').slice(1).join(' ');
             return {
+                api: 'push',
                 type: 'text',
-                text: `${boldSerif("[ RSVP KEHADIRAN ]")}\n${event}\nYang Dapat Hadir:\n1. \n2. \n3. \n \n Yang Tidak Dapat Hadir + Alasan:\n1. \n2. \n3.\n \n @All`
+                text: `${boldSerif("[ RSVP KEHADIRAN ]")}\n${event}\nYang Dapat Hadir:\n1. \n2. \n3. \n\nYang Tidak Dapat Hadir + Alasan:\n1. \n2. \n3.\n\n@All`
             };
         }
 
         if (lowerCommand.startsWith('/broadcast')) {
             const message = command.split(' ').slice(1).join(' ');
             return {
+                api: 'push',
                 type: 'text',
                 text: `${message}`
             };
