@@ -94,9 +94,14 @@ async function handleEvent(event) {
 
     const responseText = pushResults.map(result => `Group ID: ${result.groupId} - Status: ${result.status}${result.error ? ` - Error: ${result.error}` : ''}`).join('\n');
 
-    return client.replyMessage(event.replyToken, {
-      type: 'text',
-      text: `Broadcast Results:\n${responseText}`
+    return client.replyMessage({
+      replyToken: event.replyToken,
+      messages: [
+        {
+          type: 'text',
+          text: `[BROADCAST RESULT]\n${responseText}`
+        }
+      ]
     });
   }
 }
