@@ -1,4 +1,8 @@
 const departments = [
+    { name: "Admin Bot", code: "AA", groupId: "C1119bc1221f84a5e9c6fad69b44c7d5b"},
+    { name: "Uji Coba 1", code: "AB", groupId: "Cf28f894492f1d7f021cfb9c7ba1dd0b8"},
+    { name: "Uji Coba 2", code: "AC", groupId: "Cc36d3f83b2bc760c4af4b8b9e743b9f5"},
+    { name: "Uji Coba 3", code: "AD", groupId: "C23a7818321ea5514d8d86c58cb349417"},
     { name: "Ring 1", code: "R1" , groupId: ""},
     { name: "Ring 2", code: "R2" , groupId: ""},
     { name: "Secretary", code: "SE" , groupId: ""},
@@ -21,10 +25,6 @@ const departments = [
     { name: "Project Management", code: "PM" , groupId: ""},
     { name: "Talent Acquisition", code: "TA" , groupId: ""},
     { name: "Talent Development", code: "TD" , groupId: "C1119bsadsad44c7d5b"},
-    { name: "Admin Bot", code: "AA", groupId: "C1119bc1221f84a5e9c6fad69b44c7d5b"},
-    { name: "Uji Coba 1", code: "AB", groupId: "Cf28f894492f1d7f021cfb9c7ba1dd0b8"},
-    { name: "Uji Coba 2", code: "AC", groupId: "Cc36d3f83b2bc760c4af4b8b9e743b9f5"},
-    { name: "Uji Coba 3", code: "AD", groupId: "C23a7818321ea5514d8d86c58cb349417"},
   ];
   
   module.exports = { departments };
