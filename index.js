@@ -4,6 +4,7 @@ const line = require('@line/bot-sdk');
 const express = require('express');
 const { parseCommand } = require('./command.js');
 const fetch = require('node-fetch');
+const { departments } = require('./utils/departments.js');
 
 // create LINE SDK config from env variables
 const config = {
@@ -30,6 +31,16 @@ app.post('/callback', line.middleware(config), (req, res) => {
       res.status(500).end();
     });
 });
+
+async function pushMessageToGroup(department, data) {
+  const groupName = department.groupName
+  try {
+    await client.pushMessage(department.groupId, data);
+    return { groupName, status: 'success' };
+  } catch (error) {
+    return { groupName, status: 'failed', error: error.message };
+  }
+}
 
 // event handler
 async function handleEvent(event) {
@@ -76,9 +87,13 @@ async function handleEvent(event) {
   }
 
   if (api === 'push') {
-    return client.pushMessage({
-      to: event.source.userId,
-      messages: [data],
+    const pushResults = await Promise.all(departments.map(department => pushMessageToGroup(department, [data])));
+
+    const responseText = pushResults.map(result => `Group ID: ${result.groupId} - Status: ${result.status}${result.error ? ` - Error: ${result.error}` : ''}`).join('\n');
+
+    return client.replyMessage(event.replyToken, {
+      type: 'text',
+      text: `Broadcast Results:\n${responseText}`
     });
   }
 }
