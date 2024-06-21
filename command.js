@@ -37,15 +37,6 @@ const parseCommand = async (command) => {
     
     // if started with "/"
     if (lowerCommand[0] === '/') {
-
-        if (!commands.some(c => lowerCommand.startsWith(c.command))) {
-            return {
-                api: 'reply',
-                type: 'text',
-                text: 'Command not found, use /help for list of commands'
-            };
-        }
-
         if (lowerCommand === '/help') {
             return {
                 api: 'reply',
@@ -151,6 +142,12 @@ const parseCommand = async (command) => {
                 text: message
             };
         }
+
+        return {
+            api: 'reply',
+            type: 'text',
+            text: 'Command not found, use /help for list of commands'
+        };
     }
 };
 
