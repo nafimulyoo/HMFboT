@@ -1,7 +1,7 @@
 'use strict';
 
 const fetch = require('node-fetch');
-const { departments } = require('./utils/departements.js');
+const { departments } = require('./utils/departments.js');
 const { boldSans, boldSerif, boldItalicSans, boldItalicSerif } = require('./utils/font.js');
 
 const commands = [
