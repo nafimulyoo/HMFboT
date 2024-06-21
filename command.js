@@ -19,11 +19,12 @@ const commands = [
         command: '/particheck',
         description: 'Check the attendance of participants in a division',
         usage: '/particheck [division code or @all for broadcast]',
+        example: '/particheck TM for TM Division, /particheck @all for broadcast',
         note: 'not implemented yet for @all, R1, and other divisions'
     },
     {
         command: '/hmftthisweek',
-        description: 'Check HMFT event this week',
+        description: 'Check HMFT-ITB event this week',
         usage: '/hmftthisweek [optional: @all for broadcast]',
         note: 'not implemented yet'
     },
@@ -32,6 +33,19 @@ const commands = [
         description: 'Show attendance record link',
         usage: '/attendance [optional: @all for broadcast]',
         note: 'not implemented yet'
+    },
+    {
+        command: '/rsvp',
+        description: 'Create RSVP for HMFT-ITB event, and broadcast to all group',
+        usage: '/rsvp [Event Name - Event Description - Event Date]',
+        example: '/rsvp Pengambilan Berkas SS - Sekre HMFT-ITB - Jumat, 14 Juni 2024 Pukul 13.00 WIB ',
+    },
+    {
+        command: '/broadcast',
+        description: 'Broadcast message to all group',
+        usage: '/broadcast [message]',
+        example: '/broadcast Jangan lupa untuk mengisi form presensi ya!',
+
     }
 ];
 
@@ -52,7 +66,7 @@ const parseCommand = async (command) => {
         if (lowerCommand === '/help') {
             return {
                 type: 'text',
-                text: `${boldSerif('[ LIST OF HMFBOT COMMAND ]')}\n` + commands.map(c => `${boldSans(c.command)}: ${c.description}\nUsage: ${c.usage}${c.note ? `\nNote: ${c.note}` : ''}`).join('\n\n')
+                text: `${boldSerif('[ LIST OF HMFBOT COMMAND ]')}\n` + commands.map(c => `${boldSans(c.command)}: ${c.description}\nUsage: ${c.usage}${c.note ? `\nExample: ${c.example}` : ''}${c.example ? `\nNote: ${c.note}` : ''}`).join('\n\n')
             };
         }
 
@@ -158,6 +172,22 @@ const parseCommand = async (command) => {
                     text: `This feature is not implemented yet`
                 };
             }
+        }
+
+        if (lowerCommand.startsWith('/rsvp')) {
+            const event = command.split(' ').slice(1).join(' ');
+            return {
+                type: 'text',
+                text: `${boldItalicSerif("[ RSVP KEHADIRAN ]")}\n${event}\nYang Dapat Hadir:\n1. \n2. \n3. \nYang Tidak Dapat Hadir + Alasan:\n1. \n2. \n3.\n @All`
+            };
+        }
+
+        if (lowerCommand.startsWith('/broadcast')) {
+            const message = command.split(' ').slice(1).join(' ');
+            return {
+                type: 'text',
+                text: `${message}`
+            };
         }
     }
 };
