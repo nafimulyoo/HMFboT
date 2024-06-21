@@ -33,15 +33,15 @@ app.post('/callback', line.middleware(config), (req, res) => {
 });
 
 async function pushMessageToGroup(department, data) {
-  const groupName = department.groupName
+  const code = department.code
   try {
     await client.pushMessage({
       to: department.groupId,
       messages: [data]
     });
-    return { groupName, status: 'success' };
+    return { code, status: 'success' };
   } catch (error) {
-    return { groupName, status: 'failed', error: error.message };
+    return { code, status: 'failed', error: error.message };
   }
 }
 

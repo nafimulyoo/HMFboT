@@ -69,7 +69,7 @@ const parseCommand = async (command) => {
             return {
                 api: 'reply',
                 type: 'text',
-                text: `${boldSerif('[ LIST OF HMFBOT COMMAND ]')}\n` + commands.map(c => `${boldSans(c.command)}: ${c.description}\nUsage: ${c.usage}${c.note ? `\nExample: ${c.example}` : ''}${c.example ? `\nNote: ${c.note}` : ''}`).join('\n\n')
+                text: `${boldSerif('[ LIST OF HMFBOT COMMAND ]')}\n` + commands.map(c => `${boldSans(c.command)}: ${c.description}\nUsage: ${c.usage}${c.example ? `\nExample: ${c.example}` : ''}${c.note ? `\nNote: ${c.note}` : ''}`).join('\n\n')
             };
         }
 
