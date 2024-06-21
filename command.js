@@ -141,8 +141,8 @@ const parseCommand = async (command) => {
                     text: message
                 };
             }
-            if (command.split('\n').length > 2) {
-                const message = command.split('\n').slice(1).join('\n');
+            if (command.replace(/\r\n|\r/g, '\n').split('\n').length > 2) {
+                const message = command.replace(/\r\n|\r/g, '\n').split('\n');
                 return {
                     api: 'push',
                     type: 'text',
