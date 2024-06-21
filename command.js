@@ -23,24 +23,6 @@ const commands = [
         note: 'not implemented yet for @all, R1, and other divisions'
     },
     {
-        command: '/hmftthisweek',
-        description: 'Check HMFT-ITB event this week',
-        usage: '/hmftthisweek [optional: @all for broadcast]',
-        note: 'not implemented yet'
-    },
-    {
-        command: '/attendance',
-        description: 'Show attendance record link',
-        usage: '/attendance [optional: @all for broadcast]',
-        note: 'not implemented yet'
-    },
-    {
-        command: '/rsvp',
-        description: 'Create RSVP for HMFT-ITB event, and broadcast to all group',
-        usage: '/rsvp [Event Name - Event Location - Event Date, Event Time]',
-        example: '/rsvp Pengambilan Berkas SS - Sekre HMFT-ITB - Jumat, 14 Juni 2024, Pukul 13.00 WIB ',
-    },
-    {
         command: '/broadcast',
         description: 'Broadcast message to all group',
         usage: '/broadcast [message]',
@@ -148,64 +130,25 @@ const parseCommand = async (command) => {
             }
         }
 
-        if (lowerCommand.startsWith('/hmftthisweek')) {
-            // TODO: Implement @all broadcast for HMFTThisWeek
-            if (lowerCommand.split(' ')[1] === '@all') {
-                return {
-                    api: 'push',
-                    type: 'text',
-                    text: `This feature is not implemented yet`
-                };
-            }
-            // TODO: Implement HMFTThisWeek default
-            else {
-                return {
-                    api: 'reply',
-                    type: 'text',
-                    text: `This feature is not implemented yet`
-                };
-            }
-        }
-
-    
-        if (lowerCommand.startsWith('/attendance')) {
-            // TODO: Implement @all broadcast for Attendance
-            if (lowerCommand.split(' ')[1] === '@all') {
-                return {
-                    api: 'push',
-                    type: 'text',
-                    text: `This feature is not implemented yet`
-                };
-
-            }
-            // TODO: Implement Attendance default
-            else {
-                return {
-                    api: 'reply',
-                    type: 'text',
-                    text: `This feature is not implemented yet`
-                };
-            }
-        }
-
-        if (lowerCommand.startsWith('/rsvp')) {
-            const event = command.split(' ').slice(1).join(' ');
-            return {
-                api: 'push',
-                type: 'text',
-                text: `${boldSerif("[ RSVP KEHADIRAN ]")}\n${event}\nYang Dapat Hadir:\n1. \n2. \n3. \n\nYang Tidak Dapat Hadir + Alasan:\n1. \n2. \n3.\n\n@All`
-            };
-        }
-
+       
         if (lowerCommand.startsWith('/broadcast')) {
-            const message = command.split(' ').slice(1).join(' ');
-            return {
-                api: 'push',
-                type: 'text',
-                text: `${message}`
-            };
+            if (command.split(' ').length > 2) {
+                const message = command.split(' ').slice(1).join(' ');
+                return {
+                    api: 'push',
+                    type: 'text',
+                    text: message
+                };
+            }
+            if (command.split('\n').length > 2) {
+                const message = command.split('\n').slice(1).join(' ');
+                return {
+                    api: 'push',
+                    type: 'text',
+                    text: message
+                };
+            }
         }
-
     }
 };
 
