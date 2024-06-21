@@ -178,7 +178,7 @@ const parseCommand = async (command) => {
             const event = command.split(' ').slice(1).join(' ');
             return {
                 type: 'text',
-                text: `${boldItalicSerif("[ RSVP KEHADIRAN ]")}\n${event}\nYang Dapat Hadir:\n1. \n2. \n3. \nYang Tidak Dapat Hadir + Alasan:\n1. \n2. \n3.\n @All`
+                text: `${boldSerif("[ RSVP KEHADIRAN ]")}\n${event}\nYang Dapat Hadir:\n1. \n2. \n3. \n \n Yang Tidak Dapat Hadir + Alasan:\n1. \n2. \n3.\n \n @All`
             };
         }
 
