@@ -32,7 +32,23 @@ app.post('/callback', line.middleware(config), (req, res) => {
 });
 
 // event handler
-async  function handleEvent(event) {
+async function handleEvent(event) {
+  if (event.type === 'join') {
+    const groupId = event.source.groupId;
+    const groupSummary = client.getGroupSummary(groupId);
+    // Bot invited to
+    // Group Name:
+    // Group ID:
+
+    return client.pushMessage({
+      to: event.source.userId,
+      message: {
+        type: 'text',
+        text: `Bot invited to\nGroup Name: ${groupSummary.groupName}\nGroup ID: ${groupId}`,
+      },
+    });
+  };
+
   if (event.type !== 'message' || event.message.type !== 'text') {
     // ignore non-text-message event
     return Promise.resolve(null);

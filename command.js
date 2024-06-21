@@ -204,6 +204,13 @@ const parseCommand = async (command) => {
                 text: `${message}`
             };
         }
+        if (lowerCommand.startsWith('/getuserid')) {
+            return {
+                api: 'reply',
+                type: 'text',
+                text: `Your user id is ${event.source.userId}`
+            };
+        }
     }
 };
 
