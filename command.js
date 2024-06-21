@@ -131,8 +131,7 @@ const parseCommand = async (command) => {
 
        
         if (lowerCommand.startsWith('/broadcast')) {
-            let message = command.replace('/broadcast', '').trim();
-            // if empty, return
+            let message = command.replace('/broadcast ', '').trim();
             if (!message) {
                 return {
                     api: 'reply',
