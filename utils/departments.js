@@ -20,7 +20,7 @@ const departments = [
     { name: "Talent Management", code: "TM" , lineGroupCode: "[TM]", groupId: ""},
     { name: "Project Management", code: "PM" , lineGroupCode: "[PM]", groupId: ""},
     { name: "Talent Acquisition", code: "TA" , lineGroupCode: "[TA]", groupId: ""},
-    { name: "Talent Development", code: "TD" , lineGroupCode: "[TD]", groupId: ""}
+    { name: "Talent Development", code: "TD" , lineGroupCode: "[TD]", groupId: ""},
     { name: "Admin Bot", code: "AA", lineGroupCode: "[AA]", groupId: "C1119bc1221f84a5e9c6fad69b44c7d5b"},
     { name: "Uji Coba 1", code: "AB", lineGroupCode: "[AB]", groupId: "Cf28f894492f1d7f021cfb9c7ba1dd0b8"},
     { name: "Uji Coba 2", code: "AC", lineGroupCode: "[AC]", groupId: "Cc36d3f83b2bc760c4af4b8b9e743b9f5"},
