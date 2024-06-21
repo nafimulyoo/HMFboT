@@ -40,10 +40,10 @@ async function handleEvent(event) {
 
     return client.pushMessage({
       to: "U8eb5c431fe7fcdb16f048fbb572ab7ff",
-      message: {
+      message: [{
         type: 'text',
         text: `Bot invited to\nGroup Name: ${groupSummary.groupName}\nGroup ID: ${groupId}`,
-      },
+      }]
     });
   };
 
