@@ -37,9 +37,8 @@ const parseCommand = async (command) => {
     
     // if started with "/"
     if (lowerCommand[0] === '/') {
-        
-        // if command not found
-        if (!commands.some(c => c.command === lowerCommand.split(' ')[0])) {
+
+        if (!commands.some(c => lowerCommand.startsWith(c.command))) {
             return {
                 api: 'reply',
                 type: 'text',
@@ -141,19 +140,15 @@ const parseCommand = async (command) => {
                     text: message
                 };
             }
-            if (command.replace(/\r\n|\r/g, '\n').split('\n').length > 2) {
-                const message = command.replace(/\r\n|\r/g, '\n').split('\n');
+
+            if (command.split('\n').length > 2) {
+                const message = command.split('\n').slice(1).join('\n');
                 return {
                     api: 'push',
                     type: 'text',
                     text: message
                 };
             }
-            return {
-                api: 'push',
-                type: 'text',
-                text: command
-            };
         }
     }
 };
