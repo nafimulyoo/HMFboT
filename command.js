@@ -131,24 +131,23 @@ const parseCommand = async (command) => {
 
        
         if (lowerCommand.startsWith('/broadcast')) {
-            console.log(command);
-            if (command.split(' ').length > 2) {
-                const message = command.split(' ').slice(1).join(' ');
+            message = command.replace('/broadcast', '').trim();
+            // if empty, return
+            if (!message) {
                 return {
-                    api: 'push',
+                    api: 'reply',
                     type: 'text',
-                    text: message
+                    text: 'Please provide a message to broadcast'
                 };
             }
-
-            if (command.split('\n').length > 2) {
-                const message = command.split('\n').slice(1).join('\n');
-                return {
-                    api: 'push',
-                    type: 'text',
-                    text: message
-                };
-            }
+            message = message[0] === ' ' ? command.slice(1) : message;
+            message = message[0] === '\n' ? command.slice(1) : message;
+            
+            return {
+                api: 'push',
+                type: 'text',
+                text: message
+            };
         }
     }
 };
