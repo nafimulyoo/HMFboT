@@ -24,11 +24,10 @@ const commands = [
     },
     {
         command: '/broadcast',
-        description: 'Broadcast message to all group',
+        description: 'Broadcast message to Ring 1, Ring 2 and Division Groups',
         usage: '/broadcast [message]',
         example: '/broadcast Jangan lupa untuk mengisi form presensi ya!',
-
-    }
+    },
 ];
 
 const parseCommand = async (command) => {
