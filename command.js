@@ -140,8 +140,10 @@ const parseCommand = async (command) => {
                     text: 'Please provide a message to broadcast'
                 };
             }
-            message = message[0] === ' ' ? command.slice(1) : message;
-            message = message[0] === '\n' ? command.slice(1) : message;
+            
+            while (message[0] === ' ' || message[0] === '\n') {
+                message = message.slice(1);
+            }
             
             return {
                 api: 'push',
