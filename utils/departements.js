@@ -1,4 +1,4 @@
-export const departments = [
+const departments = [
     { name: "Ring 1", code: "R1" , lineGroupCode: "[RING 1]"},
     { name: "Ring 2", code: "R2" , lineGroupCode: "[RING 2]"},
     { name: "Secretary", code: "SE" , lineGroupCode: "[SE]"},

@@ -262,9 +262,9 @@ const mapText = (text, charMap) => {
     return text.split('').map(char => charMap[char] || char).join('');
 };
 
-export const boldSans = (text) => mapText(text, boldSansCharMap);
-export const boldSerif = (text) => mapText(text, boldSerifCharMap);
-export const boldItalicSans = (text) => mapText(text, boldItalicSansCharMap);
-export const boldItalicSerif = (text) => mapText(text, boldItalicSerifCharMap);
+const boldSans = (text) => mapText(text, boldSansCharMap);
+const boldSerif = (text) => mapText(text, boldSerifCharMap);
+const boldItalicSans = (text) => mapText(text, boldItalicSansCharMap);
+const boldItalicSerif = (text) => mapText(text, boldItalicSerifCharMap);
 
 module.exports = { boldSans, boldSerif, boldItalicSans, boldItalicSerif };

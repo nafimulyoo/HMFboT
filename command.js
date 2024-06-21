@@ -1,7 +1,7 @@
 'use strict';
 
 const fetch = require('node-fetch');
-const { departments } = require('./utils/departments.js');
+const { departments } = require('./utils/departements.js');
 const { boldSans, boldSerif, boldItalicSans, boldItalicSerif } = require('./utils/font.js');
 
 const commands = [
@@ -116,10 +116,10 @@ const parseCommand = async (command) => {
             }
 
             // TODO: Implement Division Particheck
-            else {
+            if (departments.some(department => department.code.toLowerCase() === code)) {
                 return {
                     type: 'text',
-                    text: `Division Code ${code} not implemented`
+                    text: `This feature is not implemented yet`
                 };
             }
         }
