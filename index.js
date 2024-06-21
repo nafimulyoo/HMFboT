@@ -52,6 +52,12 @@ async function handleEvent(event) {
     return Promise.resolve(null);
   }
 
+  if (event.message.text == '/getuserid') {
+    return client.replyMessage({
+      replyToken: event.replyToken,
+      messages: [data],
+    });
+  }
   
   const { api, ...data } = await parseCommand(event.message.text);
 
