@@ -41,7 +41,7 @@ const parseCommand = async (command) => {
             return {
                 api: 'reply',
                 type: 'text',
-                text: `${boldSerif('[ LIST OF HMFBOT COMMAND ]')}\n` + commands.map(c => `${boldSans(c.command)}: ${c.description}\nUsage: ${c.usage}${c.example ? `\nExample: ${c.example}` : ''}${c.note ? `\nNote: ${c.note}` : ''}`).join('\n\n')
+                text: `${boldSerif('[ LIST OF #BERPROSESBOT COMMAND ]')}\n` + commands.map(c => `${boldSans(c.command)}: ${c.description}\nUsage: ${c.usage}${c.example ? `\nExample: ${c.example}` : ''}${c.note ? `\nNote: ${c.note}` : ''}`).join('\n\n')
             };
         }
 
@@ -49,7 +49,7 @@ const parseCommand = async (command) => {
             return {
                 api: 'reply',
                 type: 'text',
-                text: 'This bot is created by the Talent Management Division of BP HMFT-ITB 2024/2025 #RuangBerproses and Pria Misterius 👅👅, to help automate the process of checking participant attendance. Use /help for list of commands'
+                text: '#BerprosesBot is created by the Talent Management Division of BP HMFT-ITB 2024/2025 #RuangBerproses and Pria Misterius 👅👅. Use /help for list of commands'
             };
         }
 
