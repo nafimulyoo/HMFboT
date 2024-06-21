@@ -35,14 +35,14 @@ app.post('/callback', line.middleware(config), (req, res) => {
 async function handleEvent(event) {
   if (event.type === 'join') {
     const groupId = event.source.groupId;
-    const groupSummary = client.getGroupSummary(groupId);
+    const groupSummary = await client.getGroupSummary(groupId);
 
 
     return client.pushMessage({
       to: "U8eb5c431fe7fcdb16f048fbb572ab7ff",
       messages: [{
         type: 'text',
-        text: `Bot invited to\nGroup Name: ${groupSummary.groupName}\nGroup ID: ${groupId}`,
+        text: `Bot invited to\nGroup Name: ${groupSummary.groupName}\nGroup ID: ${groupSummary.groupId}`,
       }]
     });
   };
