@@ -131,7 +131,7 @@ const parseCommand = async (command) => {
 
        
         if (lowerCommand.startsWith('/broadcast')) {
-            message = command.replace('/broadcast', '').trim();
+            let message = command.replace('/broadcast', '').trim();
             // if empty, return
             if (!message) {
                 return {
@@ -140,7 +140,7 @@ const parseCommand = async (command) => {
                     text: 'Please provide a message to broadcast'
                 };
             }
-            
+
             while (message[0] === ' ' || message[0] === '\n') {
                 message = message.slice(1);
             }
