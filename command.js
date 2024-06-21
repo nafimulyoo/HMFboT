@@ -55,6 +55,14 @@ const parseCommand = async (command) => {
     
     // if started with "/"
     if (lowerCommand[0] === '/') {
+        if (lowerCommand.startsWith('/getuserid')) {
+            return {
+                api: 'reply',
+                type: 'text',
+                text: `Your user id is ${event.source.userId}`
+            };
+        }
+        
         // if command not found
         if (!commands.some(c => c.command === lowerCommand.split(' ')[0])) {
             return {
@@ -204,13 +212,7 @@ const parseCommand = async (command) => {
                 text: `${message}`
             };
         }
-        if (lowerCommand.startsWith('/getuserid')) {
-            return {
-                api: 'reply',
-                type: 'text',
-                text: `Your user id is ${event.source.userId}`
-            };
-        }
+
     }
 };
 
