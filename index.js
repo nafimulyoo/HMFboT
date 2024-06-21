@@ -55,7 +55,10 @@ async function handleEvent(event) {
   if (event.message.text == '/getuserid') {
     return client.replyMessage({
       replyToken: event.replyToken,
-      messages: [data],
+      messages: {
+        type: 'text',
+        text: `Your user id is ${event.source.userId}`
+      }
     });
   }
   

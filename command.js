@@ -55,7 +55,7 @@ const parseCommand = async (command) => {
     
     // if started with "/"
     if (lowerCommand[0] === '/') {
-
+        
         // if command not found
         if (!commands.some(c => c.command === lowerCommand.split(' ')[0])) {
             return {
