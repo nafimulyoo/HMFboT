@@ -149,6 +149,11 @@ const parseCommand = async (command) => {
                     text: message
                 };
             }
+            return {
+                api: 'push',
+                type: 'text',
+                text: message
+            };
         }
     }
 };
