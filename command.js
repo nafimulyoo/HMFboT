@@ -132,16 +132,17 @@ const parseCommand = async (command) => {
        
         if (lowerCommand.startsWith('/broadcast ') || lowerCommand.startsWith('/broadcast\n')) {
             let message = command.replace('/broadcast', '').trim();
+
+            while (message[0] === ' ' || message[0] === '\n') {
+                message = message.slice(1);
+            }
+
             if (!message) {
                 return {
                     api: 'reply',
                     type: 'text',
                     text: 'Please provide a message to broadcast'
                 };
-            }
-
-            while (message[0] === ' ' || message[0] === '\n') {
-                message = message.slice(1);
             }
             
             return {
