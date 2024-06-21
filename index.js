@@ -36,9 +36,7 @@ async function handleEvent(event) {
   if (event.type === 'join') {
     const groupId = event.source.groupId;
     const groupSummary = client.getGroupSummary(groupId);
-    // Bot invited to
-    // Group Name:
-    // Group ID:
+
 
     return client.pushMessage({
       to: event.source.userId,
