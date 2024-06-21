@@ -1,0 +1,59 @@
+'use strict';
+
+const line = require('@line/bot-sdk');
+const express = require('express');
+const { parseCommand } = require('./command.js');
+const fetch = require('node-fetch');
+
+// create LINE SDK config from env variables
+const config = {
+  channelSecret: process.env.CHANNEL_SECRET,
+};
+
+// create LINE SDK client
+const client = new line.messagingApi.MessagingApiClient({
+  channelAccessToken: process.env.CHANNEL_ACCESS_TOKEN
+});
+
+// create Express app
+// about Express itself: https://expressjs.com/
+const app = express();
+
+// register a webhook handler with middleware
+// about the middleware, please refer to doc
+app.post('/callback', line.middleware(config), (req, res) => {
+  Promise
+    .all(req.body.events.map(handleEvent))
+    .then((result) => res.json(result))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).end();
+    });
+});
+
+// event handler
+async  function handleEvent(event) {
+  if (event.type !== 'message' || event.message.type !== 'text') {
+    // ignore non-text-message event
+    return Promise.resolve(null);
+  }
+
+  
+  const response = await parseCommand(event.message.text);
+
+  if (!response) {
+    return Promise.resolve(null);
+  }
+
+  // use reply API
+  return client.replyMessage({
+    replyToken: event.replyToken,
+    messages: [response],
+  });
+}
+
+// listen on port
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`listening on ${port}`);
+});

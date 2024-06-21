@@ -1,0 +1,14 @@
+{
+  "name": "hmfbot",
+  "version": "0.0.0",
+  "main": "index.js",
+  
+  "scripts": {
+    "start": "node ."
+  },
+  "dependencies": {
+    "@line/bot-sdk": "^9.2.2",
+    "express": "^4.19.2",
+    "node-fetch": "^2.7.0"
+  }
+}
