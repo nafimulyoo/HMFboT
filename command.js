@@ -132,6 +132,7 @@ const parseCommand = async (command) => {
 
        
         if (lowerCommand.startsWith('/broadcast')) {
+            console.log(command);
             if (command.split(' ').length > 2) {
                 const message = command.split(' ').slice(1).join(' ');
                 return {
@@ -141,7 +142,7 @@ const parseCommand = async (command) => {
                 };
             }
             if (command.split('\n').length > 2) {
-                const message = command.split('\n').slice(1).join(' ');
+                const message = command.split('\n').slice(1).join('\n');
                 return {
                     api: 'push',
                     type: 'text',
