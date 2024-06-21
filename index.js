@@ -90,7 +90,7 @@ async function handleEvent(event) {
   }
 
   if (api === 'push') {
-    const pushResults = await Promise.all(departments.map(department => pushMessageToGroup(department, [data])));
+    const pushResults = await Promise.all(departments.map(department => pushMessageToGroup(department, data)));
 
     const responseText = pushResults.map(result => `Group ID: ${result.groupId} - Status: ${result.status}${result.error ? ` - Error: ${result.error}` : ''}`).join('\n');
 
