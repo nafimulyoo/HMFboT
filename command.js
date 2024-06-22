@@ -146,7 +146,7 @@ const parseCommand = async (command) => {
             return {
                 api: 'reply',
                 type: 'text',
-                text: `${boldSerif('ANDA SISPEK, KAMI RISPEK 😎🫵🫵')}`
+                text: `${boldSerif('ANDA SISPEK (Suka rISPEK), KAMI RISPEK 😎🫵🫵 RAWRRR 🌋🌋💥')}`
             };
         }
 
