@@ -185,11 +185,7 @@ const parseCommand = async (event) => {
         
         const groupCodePart = commandPart.match(/\[([^\]]+)\]/)[1];
         let message = commandPart.replace(/\[([^\]]+)\]/, '').trim();
-
-        while (message[0] === ' ' || message[0] === '\n') {
-            message = message.slice(1);
-        }
-
+        
         if (!groupCodePart) {
             return {
                 api: 'reply',
@@ -205,6 +201,11 @@ const parseCommand = async (event) => {
                 text: 'Please provide a message to broadcast, example: /broadcastgroup [TM TA TD PM] Hello World!'
             };
         }
+        
+        while (message[0] === ' ' || message[0] === '\n') {
+            message = message.slice(1);
+        }
+
         
         const groupCodes = groupCodePart.split(' ').map(code => code.trim());
         
