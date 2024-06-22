@@ -5,6 +5,7 @@ const express = require('express');
 const { parseCommand } = require('./command.js');
 const fetch = require('node-fetch');
 const { departments } = require('./utils/departments.js');
+const { boldSans, boldSerif, boldItalicSans, boldItalicSerif } = require('./utils/font.js');
 
 // create LINE SDK config from env variables
 const config = {
@@ -100,7 +101,7 @@ async function handleEvent(event) {
         messages: [
           {
             type: 'text',
-            text: `[BROADCAST RESULT]\n${responseText}`
+            text: `${boldSerif("[BROADCAST RESULT]")}\n${responseText}`
           }
         ]
       });
@@ -117,7 +118,7 @@ async function handleEvent(event) {
       messages: [
         {
           type: 'text',
-          text: `[BROADCAST RESULT]\n${responseText}`
+          text: `${boldSerif("[BROADCAST RESULT]")}\n${responseText}`
         }
       ]
     });
