@@ -142,6 +142,31 @@ const parseCommand = async (command) => {
             };
         }
 
+        if (lowerCommand === '/rispek') {
+            return {
+                api: 'reply',
+                type: 'text',
+                text: `${boldSerif('ANDA SISPEK, KAMI RISPEK 😎🫵🫵')}`
+            };
+        }
+
+        
+        if (lowerCommand === '/assalamualaikum') {
+            return {
+                api: 'reply',
+                type: 'text',
+                text: 'Waalaikumsalam'
+            };
+        }
+
+        if (lowerCommand === '/assalamualaikum') {
+            return {
+                api: 'reply',
+                type: 'text',
+                text: 'Waalaikumsalam'
+            };
+        }
+
         return {
             api: 'reply',
             type: 'text',
