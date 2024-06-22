@@ -32,7 +32,7 @@ const commands = [
         command: '/broadcastgroup',
         description: 'Broadcast message to specific group',
         usage: '/broadcastgroup [group codes] [message]',
-        example: '/broadcastgroup [TM TA TD PM] Hello World!',
+        example: '/broadcastgroup <TM TA TD PM> Hello World!',
     },
     {
         command: '/groupcodes',
@@ -137,7 +137,6 @@ const parseCommand = async (event) => {
         const allowedGroupCode = ["AA", "GS", "TM", "R1"]
         const GeneralSecretariatId = "Cbbcc1a0fb91d5f9ebe339c7f9e15242a";
 
-
         if (!allowedGroupCode.includes(groupCodeSource) && groupIdSource !== GeneralSecretariatId) {
             return {
                 api: 'reply',
@@ -182,43 +181,43 @@ const parseCommand = async (event) => {
         }
         
         let commandPart = command.replace('/broadcastgroup', '').trim();
-        
-        const groupCodePart = commandPart.match(/\[([^\]]+)\]/)[1];
-        
-        if (!groupCodePart) {
+    
+        if (!commandPart.includes('<') || !commandPart.includes('>')) {
             return {
                 api: 'reply',
                 type: 'text',
-                text: 'Please provide group codes to broadcast, example: /broadcastgroup [TM TA TD PM] Hello World!'
+                text: 'Please provide group codes in angle brackets < >, example: /broadcastgroup <TM TA TD PM> Hello World!'
             };
         }
         
-        let message = commandPart.replace(/\[([^\]]+)\]/, '').trim();
+        const groupCodePart = commandPart.match(/<([^>]+)>/)[1];
+        let message = commandPart.replace(/<[^>]+>/, '').trim();
+    
         while (message[0] === ' ' || message[0] === '\n') {
             message = message.slice(1);
         }
-
+    
         if (!message) {
             return {
                 api: 'reply',
                 type: 'text',
-                text: 'Please provide a message to broadcast, example: /broadcastgroup [TM TA TD PM] Hello World!'
+                text: 'Please provide a message to broadcast'
             };
-        }        
+        }
         
         const groupCodes = groupCodePart.split(' ').map(code => code.trim());
         
         const validGroupCodes = departments.map(department => department.code);
         const invalidGroupCodes = groupCodes.filter(code => !validGroupCodes.includes(code));
-
+    
         if (invalidGroupCodes.length > 0) {
             return {
                 api: 'reply',
                 type: 'text',
-                text: `Invalid group codes or format: ${invalidGroupCodes.join(', ')}, to see list of group codes use /groupcodes`
+                text: `Invalid group codes: ${invalidGroupCodes.join(', ')}`
             };
         }
-
+    
         return {
             api: 'pushsome',
             groupCodes: groupCodes,
@@ -226,6 +225,7 @@ const parseCommand = async (event) => {
             text: message
         };
     }
+    
     
     if (lowerCommand === '/groupcodes') {
         return {
