@@ -33,7 +33,7 @@ const commands = [
         description: 'Broadcast message to specific group',
         usage: '/broadcastgroup [group codes] [message]',
         example: '/broadcastgroup [TM TA TD PM] Hello World!',
-    }
+    },
     {
         command: '/groupcodes',
         description: 'List of group codes',
