@@ -159,14 +159,6 @@ const parseCommand = async (command) => {
             };
         }
 
-        if (lowerCommand === '/assalamualaikum') {
-            return {
-                api: 'reply',
-                type: 'text',
-                text: 'Waalaikumsalam'
-            };
-        }
-
         return {
             api: 'reply',
             type: 'text',
