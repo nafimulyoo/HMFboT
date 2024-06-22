@@ -121,11 +121,9 @@ const parseCommand = async (event) => {
 
     
     if (lowerCommand.startsWith('/broadcast ') || lowerCommand.startsWith('/broadcast\n')) {
+        const allowedGroupCode = ["AA", "GS", "TM", "R1"]
         
-        const groupIdSource = event.source.groupId;
-        const allowedGroups = ["AA", "GS", "TM", "R1"]
-        
-        if (!allowedGroups.includes(groupIdSource)) {
+        if (!allowedGroupCode.includes(groupCodeSource)) {
             return {
                 api: 'reply',
                 type: 'text',
