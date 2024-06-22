@@ -121,6 +121,9 @@ const parseCommand = async (event) => {
 
     
     if (lowerCommand.startsWith('/broadcast ') || lowerCommand.startsWith('/broadcast\n')) {
+        
+        const groupIdSource = source.groupId;
+        const groupCodeSource = departments.find(department => department.groupId === groupIdSource).code;
         const allowedGroupCode = ["AA", "GS", "TM", "R1"]
         
         if (!allowedGroupCode.includes(groupCodeSource)) {
