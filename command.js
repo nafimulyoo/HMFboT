@@ -186,7 +186,7 @@ const parseCommand = async (event) => {
             return {
                 api: 'reply',
                 type: 'text',
-                text: 'Please provide group codes in angle brackets < >, example: /broadcastgroup <TM TA TD PM> Hello World!\n For list of group codes, use /groupcodes'
+                text: 'Please provide group codes in angle brackets < >, example: /broadcastgroup <TM TA TD PM> Hello World!\nFor list of group codes, use /groupcodes'
             };
         }
         
