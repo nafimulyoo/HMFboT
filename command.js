@@ -34,6 +34,11 @@ const commands = [
         usage: '/broadcastgroup [group codes] [message]',
         example: '/broadcastgroup [TM TA TD PM] Hello World!',
     }
+    {
+        command: '/groupcodes',
+        description: 'List of group codes',
+        usage: '/groupcodes',
+    }
 ];
 
 const parseCommand = async (event) => {
@@ -179,7 +184,7 @@ const parseCommand = async (event) => {
         let commandPart = command.replace('/broadcastgroup', '').trim();
         
         const groupCodePart = commandPart.match(/\[([^\]]+)\]/)[1];
-        const message = commandPart.replace(/\[([^\]]+)\]/, '').trim();
+        let message = commandPart.replace(/\[([^\]]+)\]/, '').trim();
 
         while (message[0] === ' ' || message[0] === '\n') {
             message = message.slice(1);
@@ -189,12 +194,24 @@ const parseCommand = async (event) => {
             return {
                 api: 'reply',
                 type: 'text',
-                text: 'Please provide a message to broadcast'
+                text: 'Please provide a message to broadcast, example: /broadcastgroup [TM TA TD PM] Hello World!'
             };
         }
         
         const groupCodes = groupCodePart.split(' ').map(code => code.trim());
         
+        // Validate group codes
+        const validGroupCodes = departments.map(department => department.code);
+        const invalidGroupCodes = groupCodes.filter(code => !validGroupCodes.includes(code));
+
+        if (invalidGroupCodes.length > 0) {
+            return {
+                api: 'reply',
+                type: 'text',
+                text: `Invalid group codes or format: ${invalidGroupCodes.join(', ')}, example: /broadcastgroup [TM TA TD PM] Hello World!, to see list of group codes use /groupcodes`
+            };
+        }
+
         return {
             api: 'pushsome',
             groupCodes: groupCodes,
@@ -203,6 +220,13 @@ const parseCommand = async (event) => {
         };
     }
     
+    if (lowerCommand === '/groupcodes') {
+        return {
+            api: 'reply',
+            type: 'text',
+            text: `${boldSerif('[ LIST OF GROUP CODES ]')}\n` + departments.map(department => `${department.name} (${department.code})`).join('\n')
+        };
+    }
     
 
     if (lowerCommand === '/rispek') {
