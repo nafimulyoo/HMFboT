@@ -125,8 +125,10 @@ const parseCommand = async (event) => {
         const groupIdSource = source.groupId;
         const groupCodeSource = departments.find(department => department.groupId === groupIdSource).code;
         const allowedGroupCode = ["AA", "GS", "TM", "R1"]
-        
-        if (!allowedGroupCode.includes(groupCodeSource)) {
+        const GeneralSecretariatId = "Cbbcc1a0fb91d5f9ebe339c7f9e15242a";
+
+
+        if (!allowedGroupCode.includes(groupCodeSource) && groupIdSource !== GeneralSecretariatId) {
             return {
                 api: 'reply',
                 type: 'text',
