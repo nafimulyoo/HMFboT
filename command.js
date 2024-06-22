@@ -190,6 +190,14 @@ const parseCommand = async (event) => {
             message = message.slice(1);
         }
 
+        if (!groupCodePart) {
+            return {
+                api: 'reply',
+                type: 'text',
+                text: 'Please provide group codes to broadcast, example: /broadcastgroup [TM TA TD PM] Hello World!'
+            };
+        }
+
         if (!message) {
             return {
                 api: 'reply',
@@ -200,7 +208,6 @@ const parseCommand = async (event) => {
         
         const groupCodes = groupCodePart.split(' ').map(code => code.trim());
         
-        // Validate group codes
         const validGroupCodes = departments.map(department => department.code);
         const invalidGroupCodes = groupCodes.filter(code => !validGroupCodes.includes(code));
 
@@ -208,7 +215,7 @@ const parseCommand = async (event) => {
             return {
                 api: 'reply',
                 type: 'text',
-                text: `Invalid group codes or format: ${invalidGroupCodes.join(', ')}, example: /broadcastgroup [TM TA TD PM] Hello World!, to see list of group codes use /groupcodes`
+                text: `Invalid group codes or format: ${invalidGroupCodes.join(', ')}, to see list of group codes use /groupcodes`
             };
         }
 
