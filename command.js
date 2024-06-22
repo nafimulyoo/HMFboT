@@ -214,7 +214,7 @@ const parseCommand = async (event) => {
             return {
                 api: 'reply',
                 type: 'text',
-                text: `Invalid group codes: ${invalidGroupCodes.join(', ')}`
+                text: `Invalid group codes: ${invalidGroupCodes.join(', ')}. For list of group codes, use /groupcodes`
             };
         }
     
