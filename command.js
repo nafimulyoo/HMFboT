@@ -224,7 +224,7 @@ const parseCommand = async (event) => {
         return {
             api: 'reply',
             type: 'text',
-            text: `${boldSerif('[ LIST OF GROUP CODES ]')}\n` + departments.map(department => `${department.name} (${department.code})`).join('\n')
+            text: `${boldSerif('[ LIST OF GROUP CODES ]')}\n` + departments.filter(department => !['AA', 'AB', 'AC', 'AD'].includes(department.code)).map(department => `${department.code}: ${department.name}`).join('\n')
         };
     }
     
