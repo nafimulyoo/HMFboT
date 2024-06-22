@@ -64,7 +64,7 @@ async function handleEvent(event) {
   if (event.type !== 'message' || event.message.type !== 'text' || event.message.text[0] !== '/') {
     return Promise.resolve(null);
   }
-  
+
   // if (event.message.text == '/getuserid') {
   //   return client.replyMessage({
   //     replyToken: event.replyToken,
@@ -76,7 +76,7 @@ async function handleEvent(event) {
   // }
 
   
-  const { api, ...data } = await parseCommand(event);
+  const { api, groupCodes, ...data } = await parseCommand(event);
 
   if (!api) {
     return Promise.resolve(null);
@@ -88,8 +88,25 @@ async function handleEvent(event) {
       messages: [data],
     });
   }
+  
 
-  if (api === 'push') {
+  if (api === 'pushsome') {
+      const pushResults = await Promise.all(groupCodes.map(groupCode => pushMessageToGroup(departments.find(department => department.code === groupCode), data)));
+    
+      const responseText = pushResults.map(result => `Group Code: ${result.code} - Status: ${result.status}${result.error ? ` - Error: ${result.error}` : ''}`).join('\n');
+
+      return client.replyMessage({
+        replyToken: event.replyToken,
+        messages: [
+          {
+            type: 'text',
+            text: `[BROADCAST RESULT]\n${responseText}`
+          }
+        ]
+      });
+  }
+
+  if (api === 'pushall') {
 
     const pushResults = await Promise.all(departments.map(department => pushMessageToGroup(department, data)));
 

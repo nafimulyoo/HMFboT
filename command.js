@@ -26,8 +26,14 @@ const commands = [
         command: '/broadcast',
         description: 'Broadcast message to Ring 1, Ring 2 and Division Groups',
         usage: '/broadcast [message]',
-        example: '/broadcast Jangan lupa untuk mengisi form presensi ya!',
+        example: '/broadcast Hello World!',
     },
+    {
+        command: '/broadcastgroup',
+        description: 'Broadcast message to specific group',
+        usage: '/broadcastgroup [group codes] [message]',
+        example: '/broadcastgroup [TM TA TD PM] Hello World!',
+    }
 ];
 
 const parseCommand = async (event) => {
@@ -119,7 +125,6 @@ const parseCommand = async (event) => {
         }
     }
 
-    
     if (lowerCommand.startsWith('/broadcast ') || lowerCommand.startsWith('/broadcast\n')) {
         
         const groupIdSource = source.groupId;
@@ -151,11 +156,54 @@ const parseCommand = async (event) => {
         }
         
         return {
-            api: 'push',
+            api: 'pushall',
             type: 'text',
             text: message
         };
     }
+
+    if (lowerCommand.startsWith('/broadcastgroup')) {
+        const groupIdSource = source.groupId;
+        const groupCodeSource = departments.find(department => department.groupId === groupIdSource).code;
+        const allowedGroupCode = ["AA", "GS", "TM", "R1"];
+        const GeneralSecretariatId = "Cbbcc1a0fb91d5f9ebe339c7f9e15242a";
+    
+        if (!allowedGroupCode.includes(groupCodeSource) && groupIdSource !== GeneralSecretariatId) {
+            return {
+                api: 'reply',
+                type: 'text',
+                text: 'Only Ring 1, General Secretariat, and Talent Management Division can use this command'
+            };
+        }
+        
+        let commandPart = command.replace('/broadcastgroup', '').trim();
+        
+        const groupCodePart = commandPart.match(/\[([^\]]+)\]/)[1];
+        const message = commandPart.replace(/\[([^\]]+)\]/, '').trim();
+
+        while (message[0] === ' ' || message[0] === '\n') {
+            message = message.slice(1);
+        }
+
+        if (!message) {
+            return {
+                api: 'reply',
+                type: 'text',
+                text: 'Please provide a message to broadcast'
+            };
+        }
+        
+        const groupCodes = groupCodePart.split(' ').map(code => code.trim());
+        
+        return {
+            api: 'pushsome',
+            groupCodes: groupCodes,
+            type: "text",
+            text: message
+        };
+    }
+    
+    
 
     if (lowerCommand === '/rispek') {
         return {
