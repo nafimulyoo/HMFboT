@@ -237,10 +237,18 @@ const parseCommand = async (event) => {
     
 
     if (lowerCommand === '/rispek') {
+        const randNumber = Math.floor(Math.random() * 3) + 1;
+        const rispeks = [
+            `${boldSerif('ANDA SISPEK (Suka rISPEK), KAMI RISPEK 😎🫵🥇 RAWRRR 🌋🌋💥')}`,
+            `${boldSerif('MAHKOTAMU JATUH, KING 👑')}`,
+            `${boldSerif('WARNING ⚠️: SISPEK DETECTED 😎🫵')}`,
+        ]
+        const rispek = rispeks[randNumber];
+
         return {
             api: 'reply',
             type: 'text',
-            text: `${boldSerif('ANDA SISPEK (Suka rISPEK), KAMI RISPEK 😎🫵🫵 RAWRRR 🌋🌋💥')}`
+            text: rispek
         };
     }
 

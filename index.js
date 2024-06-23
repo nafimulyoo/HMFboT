@@ -36,6 +36,7 @@ app.post('/callback', line.middleware(config), (req, res) => {
 async function pushMessageToGroup(department, data) {
   const code = department.code
   try {
+    await new Promise(resolve => setTimeout(resolve, 100));
     await client.pushMessage({
       to: department.groupId,
       messages: [data]
